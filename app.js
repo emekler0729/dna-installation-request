@@ -243,7 +243,7 @@ function makePrintTables(activities) {
         for (let header of detailHeaders) {
             let td = document.createElement('td');
             td.textContent = activity[header];
-            if (header === 'activity') td.classList.add('activity-descrption');
+            if (header === 'activity') td.classList.add('activity-description');
             tr.append(td);
         }
 
@@ -260,29 +260,41 @@ function makePrintTables(activities) {
     activities.forEach(activity => {
         if (activity.activity && activity.technician && !isNaN(activity.startDateTime.getTime()) && !isNaN(activity.endDateTime.getTime())) {
             let tr = document.createElement('tr');
+            let trEnd = document.createElement('tr');
 
             for (let header of summaryHeaders) {
                 let td = document.createElement('td');
 
+                let date, day, month, year, time;
                 switch (header) {
                     case 'startDateTime':
-                    case 'endDateTime':
-                        let date = activity[header];
-                        let [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
-                        td.textContent = `${month + 1}/${day}/${year % 1000}`;
+                        date = activity[header];
+                        [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
+                        time = `${date.toLocaleTimeString('en-US').slice(0, 4)} ${date.toLocaleTimeString('en-US').slice(-2)}`;
+                        td.textContent = `${month + 1}/${day}/${year % 1000} ${time}`;
                         tr.append(td)
-                        td = document.createElement('td');
-                        td.textContent = `${date.toLocaleTimeString('en-US').slice(0, 4)} ${date.toLocaleTimeString('en-US').slice(-2)}`;
+                        break;
+                    case 'endDateTime':
+                        date = activity[header];
+                        [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
+                        time = `${date.toLocaleTimeString('en-US').slice(0, 4)} ${date.toLocaleTimeString('en-US').slice(-2)}`;
+                        td.textContent = `${month + 1}/${day}/${year % 1000} ${time}`;
+                        trEnd.append(td)
                         break;
                     default:
                         td.textContent = activity[header];
+                        td.setAttribute('rowspan', '2');
+                        if (header === 'activity') td.classList.add('activity-description');
+                        if (header === 'avgHrs' || header === 'totalHrs') {
+                            td.classList.add('text-center');
+                        }
+                        tr.append(td);
                         break;
                 }
-
-                tr.append(td);
             }
 
             summaryTable.append(tr);
+            summaryTable.append(trEnd);
         }
     });
 
