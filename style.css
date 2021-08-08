@@ -7,7 +7,7 @@
 }
 
 @media print {
-    table {
+    table tr {
         page-break-inside: avoid;
     }
 }
