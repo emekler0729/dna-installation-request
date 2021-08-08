@@ -78,7 +78,30 @@
             </tbody>
         </table>
     </section>
-    <section class="activities accordion mb-3">
+    <section class="activity-summary container d-none d-print-block">
+        <div class="table-responsive">
+            <table id="summary-table" class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Activity</th>
+                        <th scope="col">Preferred Technician</th>
+                        <th scope="col">Visit Type</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">End Time</th>
+                        <th scope="col">Avg Hrs/day</th>
+                        <th scope="col">Total Hrs</th>
+                        <th scope="col">Travel Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="activities accordion mb-3 d-print-none">
         <div class="accordion-item">
             <h2 class="acordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -487,6 +510,280 @@
                     <div class="col-6">
                         <label for="total-hrs" class="form-label">Total Hours</label>
                         <input type="number" name="total-hrs" id="total-hrs" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="travel-day" class="form-label">Travel Day</label>
+                        <select name="travel-day" id="travel-day" class="form-select">
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="test-input-1" class="test-input">
+    <div class="activity pb-3 mb-3 border-bottom border-dark">
+        <div class="row">
+            <div class="col-md-6 activity-data">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="activity" class="form-label">Activity</label>
+                        <input type="text" name="activity" id="activity" class="form-control"
+                            value="Printer Installation">
+                    </div>
+                    <div class="col-6">
+                        <label for="visit-type" class="form-label">Visit Type</label>
+                        <select name="visit-type" id="visit-type" class="form-select">
+                            <option value="Install">Install</option>
+                            <option value="Training">Training</option>
+                            <option value="Repair">Repair</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Site Visit">Site Visit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="technician" class="form-label">Preferred Technician</label>
+                        <input type="text" name="technician" id="technician" class="form-control" value="Eduard">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="details" class="form-label">Activity Details</label>
+                        <textarea name="details" id="details" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 time-data">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="start-date" class="form-label">Start Date &amp; Time</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="date" name="start-date" id="start-date" class="form-control" value="2021-08-16">
+                    </div>
+                    <div class="col-6">
+                        <select name="start-time" id="start-time" class="form-select">
+                            <option value="05">5:00 AM</option>
+                            <option value="06">6:00 AM</option>
+                            <option value="07">7:00 AM</option>
+                            <option value="08" selected="">8:00 AM</option>
+                            <option value="09">9:00 AM</option>
+                            <option value="10">10:00 AM</option>
+                            <option value="11">11:00 AM</option>
+                            <option value="12">12:00 PM</option>
+                            <option value="13">1:00 PM</option>
+                            <option value="14">2:00 PM</option>
+                            <option value="15">3:00 PM</option>
+                            <option value="16">4:00 PM</option>
+                            <option value="17">5:00 PM</option>
+                            <option value="18">6:00 PM</option>
+                            <option value="19">7:00 PM</option>
+                            <option value="20">8:00 PM</option>
+                            <option value="21">9:00 PM</option>
+                            <option value="22">10:00 PM</option>
+                            <option value="23">11:00 PM</option>
+                            <option value="00">12:00 AM</option>
+                            <option value="01">1:00 AM</option>
+                            <option value="02">2:00 AM</option>
+                            <option value="03">3:00 AM</option>
+                            <option value="04">4:00 AM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="end-date" class="form-label">End Date &amp; Time</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="date" name="end-date" id="end-date" class="form-control" value="2021-08-20">
+                    </div>
+                    <div class="col-6">
+                        <select name="end-time" id="end-time" class="form-select">
+                            <option value="05">5:00 AM</option>
+                            <option value="06">6:00 AM</option>
+                            <option value="07">7:00 AM</option>
+                            <option value="08">8:00 AM</option>
+                            <option value="09">9:00 AM</option>
+                            <option value="10">10:00 AM</option>
+                            <option value="11">11:00 AM</option>
+                            <option value="12">12:00 PM</option>
+                            <option value="13">1:00 PM</option>
+                            <option value="14">2:00 PM</option>
+                            <option value="15">3:00 PM</option>
+                            <option value="16">4:00 PM</option>
+                            <option value="17" selected="">5:00 PM</option>
+                            <option value="18">6:00 PM</option>
+                            <option value="19">7:00 PM</option>
+                            <option value="20">8:00 PM</option>
+                            <option value="21">9:00 PM</option>
+                            <option value="22">10:00 PM</option>
+                            <option value="23">11:00 PM</option>
+                            <option value="00">12:00 AM</option>
+                            <option value="01">1:00 AM</option>
+                            <option value="02">2:00 AM</option>
+                            <option value="03">3:00 AM</option>
+                            <option value="04">4:00 AM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="avg-hrs" class="form-label">Average Hours Per Day</label>
+                        <input type="number" name="avg-hrs" id="avg-hrs" min="1" max="24" value="8"
+                            class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="total-hrs" class="form-label">Total Hours</label>
+                        <input type="number" name="total-hrs" id="total-hrs" class="form-control" readonly="">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="travel-day" class="form-label">Travel Day</label>
+                        <select name="travel-day" id="travel-day" class="form-select">
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template class="test-input" id="test-input-2">
+    <div class="activity pb-3 mb-3">
+        <div class="row">
+            <div class="col-md-6 activity-data">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="activity" class="form-label">Activity</label>
+                        <input type="text" name="activity" id="activity" class="form-control"
+                            value="Training & Start Up Support">
+                    </div>
+                    <div class="col-6">
+                        <label for="visit-type" class="form-label">Visit Type</label>
+                        <select name="visit-type" id="visit-type" class="form-select">
+                            <option value="Install">Install</option>
+                            <option value="Training" selected>Training</option>
+                            <option value="Repair">Repair</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Site Visit">Site Visit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="technician" class="form-label">Preferred Technician</label>
+                        <input type="text" name="technician" id="technician" class="form-control" value="Eduard">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="details" class="form-label">Activity Details</label>
+                        <textarea name="details" id="details" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 time-data">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="start-date" class="form-label">Start Date &amp; Time</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="date" name="start-date" id="start-date" class="form-control" value="2021-08-30">
+                    </div>
+                    <div class="col-6">
+                        <select name="start-time" id="start-time" class="form-select">
+                            <option value="05">5:00 AM</option>
+                            <option value="06">6:00 AM</option>
+                            <option value="07">7:00 AM</option>
+                            <option value="08" selected="">8:00 AM</option>
+                            <option value="09">9:00 AM</option>
+                            <option value="10">10:00 AM</option>
+                            <option value="11">11:00 AM</option>
+                            <option value="12">12:00 PM</option>
+                            <option value="13">1:00 PM</option>
+                            <option value="14">2:00 PM</option>
+                            <option value="15">3:00 PM</option>
+                            <option value="16">4:00 PM</option>
+                            <option value="17">5:00 PM</option>
+                            <option value="18">6:00 PM</option>
+                            <option value="19">7:00 PM</option>
+                            <option value="20">8:00 PM</option>
+                            <option value="21">9:00 PM</option>
+                            <option value="22">10:00 PM</option>
+                            <option value="23">11:00 PM</option>
+                            <option value="00">12:00 AM</option>
+                            <option value="01">1:00 AM</option>
+                            <option value="02">2:00 AM</option>
+                            <option value="03">3:00 AM</option>
+                            <option value="04">4:00 AM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="end-date" class="form-label">End Date &amp; Time</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="date" name="end-date" id="end-date" class="form-control" value="2021-09-03">
+                    </div>
+                    <div class="col-6">
+                        <select name="end-time" id="end-time" class="form-select">
+                            <option value="05">5:00 AM</option>
+                            <option value="06">6:00 AM</option>
+                            <option value="07">7:00 AM</option>
+                            <option value="08">8:00 AM</option>
+                            <option value="09">9:00 AM</option>
+                            <option value="10">10:00 AM</option>
+                            <option value="11">11:00 AM</option>
+                            <option value="12">12:00 PM</option>
+                            <option value="13">1:00 PM</option>
+                            <option value="14">2:00 PM</option>
+                            <option value="15">3:00 PM</option>
+                            <option value="16">4:00 PM</option>
+                            <option value="17" selected="">5:00 PM</option>
+                            <option value="18">6:00 PM</option>
+                            <option value="19">7:00 PM</option>
+                            <option value="20">8:00 PM</option>
+                            <option value="21">9:00 PM</option>
+                            <option value="22">10:00 PM</option>
+                            <option value="23">11:00 PM</option>
+                            <option value="00">12:00 AM</option>
+                            <option value="01">1:00 AM</option>
+                            <option value="02">2:00 AM</option>
+                            <option value="03">3:00 AM</option>
+                            <option value="04">4:00 AM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="avg-hrs" class="form-label">Average Hours Per Day</label>
+                        <input type="number" name="avg-hrs" id="avg-hrs" min="1" max="24" value="8"
+                            class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label for="total-hrs" class="form-label">Total Hours</label>
+                        <input type="number" name="total-hrs" id="total-hrs" class="form-control" readonly="">
                     </div>
                 </div>
                 <div class="row mb-3">

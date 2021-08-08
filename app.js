@@ -10,7 +10,7 @@ const btnAddRow = document.querySelector('#add-row');
 const btnRemoveRow = document.querySelector('#remove-row');
 
 btnUpdateChart.addEventListener('click', () => {
-    generateChart(getActivities());
+    updateSummary(getActivities());
 })
 
 btnAddRow.addEventListener('click', () => {
@@ -80,7 +80,7 @@ function getActivities() {
 }
 
 // Chart Generating Code
-function generateChart(activities) {
+function updateSummary(activities) {
     activities.sort((current, next) => {
         if (current.startDateTime < next.startDateTime) {
             return -1;
@@ -97,11 +97,12 @@ function generateChart(activities) {
         }
     });
 
-    addChartHeaders(activities);
-    addChartBody(activities);
+    makeChartHeaders(activities);
+    makeChartBody(activities);
+    makePrintTable(activities);
 }
 
-function addChartHeaders(activities) {
+function makeChartHeaders(activities) {
     const header = document.querySelector('.gantt thead > tr');
     while (header.firstChild) {
         header.removeChild(header.firstChild);
@@ -137,7 +138,7 @@ function startOfWeekString(date) {
     return `${startOfWeek.getMonth() + 1}/${startOfWeek.getDate()}`;
 }
 
-function addChartBody(activities) {
+function makeChartBody(activities) {
     const body = document.querySelector('.gantt tbody');
 
     while (body.firstChild) {
@@ -197,32 +198,49 @@ function addChartBody(activities) {
     })
 }
 
-// TODO: Update with Activity Objects
-// testInput = [
-//     {
-//         activity: 'Printer Installation',
-//         'avg-hrs': '8',
-//         'end-date': '2021-08-27',
-//         'end-time': '05',
-//         'start-date': '2021-08-23',
-//         'start-time': '05',
-//         'technician': 'Eduard',
-//         'total-hrs': '',
-//         'travel-day': 'Sunday',
-//         'visit-type': 'Install'
-//     },
-//     {
-//         activity: 'Printer Installation 2',
-//         'avg-hrs': '8',
-//         'end-date': '2021-09-03',
-//         'end-time': '05',
-//         'start-date': '2021-08-30',
-//         'start-time': '05',
-//         'technician': 'Eduard',
-//         'total-hrs': '',
-//         'travel-day': 'Sunday',
-//         'visit-type': 'Install'
-//     }
-// ]
+function makePrintTable(activities) {
+    const summaryTable = document.querySelector('#summary-table > tbody');
+    const headers = ['activity', 'technician', 'visitType', 'startDateTime', 'endDateTime', 'avgHrs', 'totalHrs', 'travelDay'];
 
-// generateChart(testInput);
+    while (summaryTable.firstChild) {
+        summaryTable.firstChild.remove();
+    }
+
+    activities.forEach(activity => {
+        if (activity.activity && activity.technician && !isNaN(activity.startDateTime.getTime()) && !isNaN(activity.endDateTime.getTime())) {
+            let tr = document.createElement('tr');
+
+            for (let header of headers) {
+                let td = document.createElement('td');
+
+                switch (header) {
+                    case 'startDateTime':
+                    case 'endDateTime':
+                        let date = activity[header];
+                        let [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
+                        td.textContent = `${month + 1}/${day}/${year % 1000}`;
+                        tr.append(td)
+                        td = document.createElement('td');
+                        td.textContent = `${date.toLocaleTimeString('en-US').slice(0, 4)} ${date.toLocaleTimeString('en-US').slice(-2)}`;
+                        break;
+                    default:
+                        td.textContent = activity[header];
+                        break;
+                }
+
+                tr.append(td);
+            }
+
+            summaryTable.append(tr);
+        }
+    });
+}
+
+function runTest() {
+    const testTemplate1 = document.querySelector('#test-input-1');
+    const testTemplate2 = document.querySelector('#test-input-2');
+    const testInput1 = testTemplate1.content.cloneNode(true);
+    const testInput2 = testTemplate2.content.cloneNode(true);
+    const testActivities = [new Activity(testInput1), new Activity(testInput2)];
+    updateSummary(testActivities);
+}
