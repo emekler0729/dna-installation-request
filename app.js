@@ -24,6 +24,7 @@ btnRemoveRow.addEventListener('click', () => {
         const lastRow = document.querySelector('.accordion-body > :last-child');
         lastRow.remove();
         toggleLastBorder();
+        updateSummary(getActivities());
     }
 });
 
