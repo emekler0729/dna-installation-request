@@ -181,7 +181,8 @@ function makeChartBody(activities) {
             const tr = document.createElement('tr');
             let description = document.createElement('td');
             description.textContent = activity.activity;
-            description.classList.add('activity-description');
+            description.classList.add(`table-td-activity`);
+
             tr.append(description);
 
             let startOffset = weeksBetween(activities[0].startOfWeek, activity.startOfWeek)
@@ -243,7 +244,7 @@ function makePrintTables(activities) {
         for (let header of detailHeaders) {
             let td = document.createElement('td');
             td.textContent = activity[header];
-            if (header === 'activity') td.classList.add('activity-description');
+            td.classList.add(`table-td-${header}`);
             tr.append(td);
         }
 
@@ -272,6 +273,7 @@ function makePrintTables(activities) {
                         [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
                         time = `${date.toLocaleTimeString('en-US').slice(0, 4)} ${date.toLocaleTimeString('en-US').slice(-2)}`;
                         td.textContent = `${month + 1}/${day}/${year % 1000} ${time}`;
+                        td.classList.add(`table-td-${header}`);
                         tr.append(td)
                         break;
                     case 'endDateTime':
@@ -279,12 +281,13 @@ function makePrintTables(activities) {
                         [day, month, year] = [date.getDate(), date.getMonth(), date.getFullYear()]
                         time = `${date.toLocaleTimeString('en-US').slice(0, 4)} ${date.toLocaleTimeString('en-US').slice(-2)}`;
                         td.textContent = `${month + 1}/${day}/${year % 1000} ${time}`;
+                        td.classList.add(`table-td-${header}`);
                         trEnd.append(td)
                         break;
                     default:
                         td.textContent = activity[header];
                         td.setAttribute('rowspan', '2');
-                        if (header === 'activity') td.classList.add('activity-description');
+                        td.classList.add(`table-td-${header}`);
                         if (header === 'avgHrs' || header === 'totalHrs') {
                             td.classList.add('text-center');
                         }

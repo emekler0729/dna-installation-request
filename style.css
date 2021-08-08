@@ -1,5 +1,9 @@
-.activity-description {
+.table-td-activity {
     width: 25%;
+}
+
+.table-td-technician, .table-td-visitType {
+    width: 20%;
 }
 
 @media print {
