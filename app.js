@@ -230,8 +230,28 @@ function makeChartBody(activities) {
 }
 
 function makePrintTables(activities) {
+    const detailTable = document.querySelector('#detail-table > tbody');
+    const detailHeaders = ['activity', 'technician', 'details'];
+
+    while (detailTable.firstChild) {
+        detailTable.firstChild.remove();
+    }
+
+    activities.forEach(activity => {
+        let tr = document.createElement('tr');
+
+        for (let header of detailHeaders) {
+            let td = document.createElement('td');
+            td.textContent = activity[header];
+            if (header === 'activity') td.classList.add('activity-descrption');
+            tr.append(td);
+        }
+
+        detailTable.append(tr);
+    })
+
     const summaryTable = document.querySelector('#summary-table > tbody');
-    const headers = ['activity', 'technician', 'visitType', 'startDateTime', 'endDateTime', 'avgHrs', 'totalHrs', 'travelDay'];
+    const summaryHeaders = ['activity', 'visitType', 'startDateTime', 'endDateTime', 'avgHrs', 'totalHrs', 'travelDay'];
 
     while (summaryTable.firstChild) {
         summaryTable.firstChild.remove();
@@ -241,7 +261,7 @@ function makePrintTables(activities) {
         if (activity.activity && activity.technician && !isNaN(activity.startDateTime.getTime()) && !isNaN(activity.endDateTime.getTime())) {
             let tr = document.createElement('tr');
 
-            for (let header of headers) {
+            for (let header of summaryHeaders) {
                 let td = document.createElement('td');
 
                 switch (header) {
@@ -266,26 +286,6 @@ function makePrintTables(activities) {
         }
     });
 
-    const detailTable = document.querySelector('#detail-table > tbody');
-
-    while (detailTable.firstChild) {
-        detailTable.firstChild.remove();
-    }
-
-    activities.forEach(activity => {
-        let tr = document.createElement('tr');
-
-        let description = document.createElement('td');
-        description.textContent = activity.activity;
-        description.classList.add('activity-description')
-        tr.append(description);
-
-        let detail = document.createElement('td');
-        detail.textContent = activity.details;
-        tr.append(detail);
-
-        detailTable.append(tr);
-    })
 }
 
 function runTest() {
