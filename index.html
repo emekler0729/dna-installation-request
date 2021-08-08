@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Install Request</title>
+    <title>Installation Scheduling Request</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -14,10 +14,11 @@
 <body>
     <nav class="navbar navbar-dark bg-dark mb-3">
         <div class="container-fluid d-flex justify-content-center">
-            <span class="navbar-brand mb-0 h1">Install Request</span>
+            <span class="navbar-brand mb-0 h1">Installation Scheduling Request</span>
         </div>
     </nav>
     <section class="header px-3 container">
+        <h2>Project Details</h2>
         <form action="#">
             <div class="row mb-3">
                 <div class="col-6">
@@ -79,6 +80,7 @@
         </table>
     </section>
     <section class="activity-summary container d-none d-print-block">
+        <h2>Activity Details</h2>
         <div class="table-responsive">
             <table id="summary-table" class="table table-sm">
                 <thead>
@@ -93,6 +95,19 @@
                         <th scope="col">Avg Hrs/day</th>
                         <th scope="col">Total Hrs</th>
                         <th scope="col">Travel Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table id="detail-table" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Activity</th>
+                        <th scope="col">Activity Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -249,136 +264,7 @@
             </div>
         </div>
     </section>
-    <!-- <section class="activities table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr class="table-dark bg-dark">
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Brief title of job requirements">Activity</th>
-                    <th scope="col">Preferred Technician</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Designator to the task type to be completed">Visit Type</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="First date that technician will be required on site">Start Date</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Start time on the first day of arrival">Start Time</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Last day that the technician will be required on site">End Date</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="The time at which the install will be complete and the technician will leave">End Time
-                    </th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Automatically calculated to display the average hours worked per day">Avg Hrs/day</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Total work hours for the project task">Total Hrs</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Identifies the day that the technician will travel to site. e.g. If the install starts at 7am on Monday and then desired technician needs to fly in, then the travel day would be Sunday.">
-                        Travel Day</th>
-                    <th scope="col" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Summary of the work that will be performed for the required task line">Work Order Details
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="activities-row-1">
-                    <td scope="row" class="p-0">
-                        <input type="text" name="activity" id="activity" class="form-control">
-                    </td>
-                    <td scope="row" class="p-0">
-                        <input type="text" name="preferred-tech" id="preferred-tech" class="form-control">
-                    </td>
-                    <td scope="row" class="p-0">
-                        <select name="visit-type" id="visit-type" class="form-select">
-                            <option value="Install">Install</option>
-                            <option value="Training">Training</option>
-                            <option value="Repair">Repair</option>
-                            <option value="Travel">Travel</option>
-                            <option value="Site Visit">Site Visit</option>
-
-                        </select>
-                    </td>
-                    <td scope="row" class="p-0">
-                        <input type="date" name="start-date" id="start-date" class="form-control">
-                    </td>
-                    <td scope="row" class="p-0">
-                        <select name="start-time" id="start-time" class="form-select">
-                            <option value="05">5:00 AM</option>
-                            <option value="06">6:00 AM</option>
-                            <option value="07">7:00 AM</option>
-                            <option value="08">8:00 AM</option>
-                            <option value="09">9:00 AM</option>
-                            <option value="10">10:00 AM</option>
-                            <option value="11">11:00 AM</option>
-                            <option value="12">12:00 PM</option>
-                            <option value="13">1:00 PM</option>
-                            <option value="14">2:00 PM</option>
-                            <option value="15">3:00 PM</option>
-                            <option value="16">4:00 PM</option>
-                            <option value="17">5:00 PM</option>
-                            <option value="18">6:00 PM</option>
-                            <option value="19">7:00 PM</option>
-                            <option value="20">8:00 PM</option>
-                            <option value="21">9:00 PM</option>
-                            <option value="22">10:00 PM</option>
-                            <option value="23">11:00 PM</option>
-                            <option value="00">12:00 AM</option>
-                            <option value="01">1:00 AM</option>
-                            <option value="02">2:00 AM</option>
-                            <option value="03">3:00 AM</option>
-                            <option value="04">4:00 AM</option>
-                        </select>
-                    </td>
-                    <td scope="row" class="p-0">
-                        <input type="date" name="end-date" id="end-date" class="form-control">
-                    </td>
-                    <td scope="row" class="p-0">
-                        <select name="end-time" id="end-time" class="form-select">
-                            <option value="05">5:00 AM</option>
-                            <option value="06">6:00 AM</option>
-                            <option value="07">7:00 AM</option>
-                            <option value="08">8:00 AM</option>
-                            <option value="09">9:00 AM</option>
-                            <option value="10">10:00 AM</option>
-                            <option value="11">11:00 AM</option>
-                            <option value="12">12:00 PM</option>
-                            <option value="13">1:00 PM</option>
-                            <option value="14">2:00 PM</option>
-                            <option value="15">3:00 PM</option>
-                            <option value="16">4:00 PM</option>
-                            <option value="17">5:00 PM</option>
-                            <option value="18">6:00 PM</option>
-                            <option value="19">7:00 PM</option>
-                            <option value="20">8:00 PM</option>
-                            <option value="21">9:00 PM</option>
-                            <option value="22">10:00 PM</option>
-                            <option value="23">11:00 PM</option>
-                            <option value="00">12:00 AM</option>
-                            <option value="01">1:00 AM</option>
-                            <option value="02">2:00 AM</option>
-                            <option value="03">3:00 AM</option>
-                            <option value="04">4:00 AM</option>
-                        </select>
-                    </td>
-                    <td scope="row" class="p-0"><input type="text" name="" id="" class="form-control"></td>
-                    <td scope="row" class="p-0"><input type="text" name="" id="" class="form-control" readonly></td>
-                    <td scope="row" class="p-0">
-                        <select name="travel-day" id="travel-day" class="form-select">
-                            <option value="Sunday">Sunday</option>
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                        </select>
-                    </td>
-                    <td scope="row" class="p-0"><input type="text" name="" id="" class="form-control"></td>
-                </tr>
-            </tbody>
-        </table>
-    </section> -->
     <div class="controls d-flex justify-content-end pe-5 mb-3">
-        <button class="btn btn-primary d-print-none" id="update-chart">Update Chart</button>
         <button class="btn btn-success mx-1 d-print-none" id="add-row">Add Row</button>
         <button class="btn btn-danger mx-1 d-print-none" id="remove-row">Remove Row</button>
     </div>
@@ -561,7 +447,8 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="details" class="form-label">Activity Details</label>
-                        <textarea name="details" id="details" rows="5" class="form-control"></textarea>
+                        <textarea name="details" id="details" rows="5"
+                            class="form-control">Do all the installing.</textarea>
                     </div>
                 </div>
             </div>
@@ -676,7 +563,7 @@
                     <div class="col-6">
                         <label for="activity" class="form-label">Activity</label>
                         <input type="text" name="activity" id="activity" class="form-control"
-                            value="Training & Start Up Support">
+                            value="Training & Start Up">
                     </div>
                     <div class="col-6">
                         <label for="visit-type" class="form-label">Visit Type</label>
@@ -698,7 +585,8 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="details" class="form-label">Activity Details</label>
-                        <textarea name="details" id="details" rows="5" class="form-control"></textarea>
+                        <textarea name="details" id="details" rows="5"
+                            class="form-control">Train the customer and do stuff.</textarea>
                     </div>
                 </div>
             </div>

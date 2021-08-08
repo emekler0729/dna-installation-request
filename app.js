@@ -5,13 +5,9 @@ const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 })
 
 // UI Code
-const btnUpdateChart = document.querySelector('#update-chart');
 const btnAddRow = document.querySelector('#add-row');
 const btnRemoveRow = document.querySelector('#remove-row');
-
-btnUpdateChart.addEventListener('click', () => {
-    updateSummary(getActivities());
-})
+const stnActivities = document.querySelector('.activities');
 
 btnAddRow.addEventListener('click', () => {
     if ('content' in document.createElement('template')) {
@@ -37,9 +33,43 @@ function toggleLastBorder() {
     lastRow && lastRow.classList.toggle('border-dark');
 }
 
+stnActivities.addEventListener('change', (e) => {
+    if (e.target.id === 'start-date' || e.target.id === 'end-date' || e.target.id === 'avg-hrs') {
+        updateTotalHours(e);
+    }
+
+    updateSummary(getActivities());
+});
+
+function updateTotalHours(e) {
+    const commonAncenstor = e.path[3];
+    const startDateElement = commonAncenstor.querySelector('#start-date');
+    const endDateElement = commonAncenstor.querySelector('#end-date');
+    const avgHrsElement = commonAncenstor.querySelector('#avg-hrs');
+    const targetElement = commonAncenstor.querySelector('#total-hrs');
+
+    let date = new Date(startDateElement.value);
+    const endDate = new Date(endDateElement.value);
+    const avgHrs = parseInt(avgHrsElement.value);
+
+    if (avgHrs && !isNaN(date.getTime()) && !isNaN(endDate.getTime())) {
+        let totalHrs = 0;
+
+        while (date <= endDate) {
+            if (date.getDay() !== 5 && date.getDay() !== 6) {
+                totalHrs += avgHrs;
+            }
+
+            date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
+        }
+
+        targetElement.value = totalHrs;
+    }
+}
+
 class Activity {
     constructor(activityHTMLElement) {
-        const inputElements = activityHTMLElement.querySelectorAll('input, select');
+        const inputElements = activityHTMLElement.querySelectorAll('input, select, textarea');
         const vals = {};
 
         for (let element of inputElements) {
@@ -54,6 +84,7 @@ class Activity {
         this.totalHrs = parseInt(vals['total-hrs']);
         this.travelDay = vals['travel-day'];
         this.visitType = vals['visit-type'];
+        this.details = vals['details'];
     }
 
     get duration() {
@@ -99,7 +130,7 @@ function updateSummary(activities) {
 
     makeChartHeaders(activities);
     makeChartBody(activities);
-    makePrintTable(activities);
+    makePrintTables(activities);
 }
 
 function makeChartHeaders(activities) {
@@ -150,7 +181,7 @@ function makeChartBody(activities) {
             const tr = document.createElement('tr');
             let description = document.createElement('td');
             description.textContent = activity.activity;
-            description.classList.add('gantt-description');
+            description.classList.add('activity-description');
             tr.append(description);
 
             let startOffset = weeksBetween(activities[0].startOfWeek, activity.startOfWeek)
@@ -198,7 +229,7 @@ function makeChartBody(activities) {
     })
 }
 
-function makePrintTable(activities) {
+function makePrintTables(activities) {
     const summaryTable = document.querySelector('#summary-table > tbody');
     const headers = ['activity', 'technician', 'visitType', 'startDateTime', 'endDateTime', 'avgHrs', 'totalHrs', 'travelDay'];
 
@@ -234,6 +265,27 @@ function makePrintTable(activities) {
             summaryTable.append(tr);
         }
     });
+
+    const detailTable = document.querySelector('#detail-table > tbody');
+
+    while (detailTable.firstChild) {
+        detailTable.firstChild.remove();
+    }
+
+    activities.forEach(activity => {
+        let tr = document.createElement('tr');
+
+        let description = document.createElement('td');
+        description.textContent = activity.activity;
+        description.classList.add('activity-description')
+        tr.append(description);
+
+        let detail = document.createElement('td');
+        detail.textContent = activity.details;
+        tr.append(detail);
+
+        detailTable.append(tr);
+    })
 }
 
 function runTest() {

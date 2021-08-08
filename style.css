@@ -1,3 +1,9 @@
-.gantt-description {
+.activity-description {
     width: 25%;
+}
+
+@media print {
+    table {
+        page-break-inside: avoid;
+    }
 }
