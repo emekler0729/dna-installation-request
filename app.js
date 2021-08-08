@@ -259,7 +259,7 @@ function makePrintTables(activities) {
     }
 
     activities.forEach(activity => {
-        if (activity.activity && activity.technician && !isNaN(activity.startDateTime.getTime()) && !isNaN(activity.endDateTime.getTime())) {
+        if (activity.activity && !isNaN(activity.startDateTime.getTime()) && !isNaN(activity.endDateTime.getTime())) {
             let tr = document.createElement('tr');
             let trEnd = document.createElement('tr');
 
