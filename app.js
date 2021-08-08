@@ -24,9 +24,11 @@ btnAddRow.addEventListener('click', () => {
 })
 
 btnRemoveRow.addEventListener('click', () => {
-    const lastRow = document.querySelector('.accordion-body > :last-child');
-    lastRow.remove();
-    toggleLastBorder();
+    if (document.querySelector('.accordion-body').children.length > 1) {
+        const lastRow = document.querySelector('.accordion-body > :last-child');
+        lastRow.remove();
+        toggleLastBorder();
+    }
 });
 
 function toggleLastBorder() {
@@ -107,6 +109,7 @@ function addChartHeaders(activities) {
 
     const corner = document.createElement('th');
     corner.setAttribute('scope', 'col');
+    corner.textContent = 'Activity Summary';
     header.append(corner);
 
     let duration = weeksBetween(activities[0].startOfWeek, activities[activities.length - 1].endOfWeek);
@@ -142,52 +145,55 @@ function addChartBody(activities) {
     }
 
     activities.forEach((activity) => {
-        const tr = document.createElement('tr');
-        let description = document.createElement('td');
-        description.textContent = activity.activity;
-        tr.append(description);
+        if (activity.activity && !isNaN(activity.startDateTime.getTime()) && !isNaN(activity.endDateTime.getTime())) {
+            const tr = document.createElement('tr');
+            let description = document.createElement('td');
+            description.textContent = activity.activity;
+            description.classList.add('gantt-description');
+            tr.append(description);
 
-        let startOffset = weeksBetween(activities[0].startOfWeek, activity.startOfWeek)
-        while (startOffset > 0) {
-            let leadingSpace = document.createElement('td');
-            tr.append(leadingSpace);
-            startOffset--;
+            let startOffset = weeksBetween(activities[0].startOfWeek, activity.startOfWeek)
+            while (startOffset > 0) {
+                let leadingSpace = document.createElement('td');
+                tr.append(leadingSpace);
+                startOffset--;
+            }
+
+            let ganttBar = document.createElement('td');
+            ganttBar.setAttribute('colspan', activity.duration);
+            ganttBar.textContent = activity.visitType;
+
+            let color = '';
+            switch (activity.visitType) {
+                case 'Install':
+                    color = 'table-primary';
+                    break;
+                case 'Training':
+                    color = 'table-success';
+                    break;
+                case 'Repair':
+                    color = 'table-danger';
+                    break;
+                case 'Travel':
+                    color = 'table-secondary';
+                    break;
+                case 'Site Visit':
+                    color = 'table-info';
+                    break;
+            }
+
+            ganttBar.classList.add(color);
+            tr.append(ganttBar);
+
+            let endOffset = weeksBetween(activity.endOfWeek, activities[activities.length - 1].endOfWeek);
+            while (endOffset > 0) {
+                let trailingSpace = document.createElement('td');
+                tr.append(trailingSpace);
+                endOffset--;
+            }
+
+            body.append(tr);
         }
-
-        let ganttBar = document.createElement('td');
-        ganttBar.setAttribute('colspan', activity.duration);
-        ganttBar.textContent = activity.visitType;
-
-        let color = '';
-        switch (activity.visitType) {
-            case 'Install':
-                color = 'table-primary';
-                break;
-            case 'Training':
-                color = 'table-success';
-                break;
-            case 'Repair':
-                color = 'table-danger';
-                break;
-            case 'Travel':
-                color = 'table-secondary';
-                break;
-            case 'Site Visit':
-                color = 'table-info';
-                break;
-        }
-
-        ganttBar.classList.add(color);
-        tr.append(ganttBar);
-
-        let endOffset = weeksBetween(activity.endOfWeek, activities[activities.length - 1].endOfWeek);
-        while (endOffset > 0) {
-            let trailingSpace = document.createElement('td');
-            tr.append(trailingSpace);
-            endOffset--;
-        }
-
-        body.append(tr);
     })
 }
 

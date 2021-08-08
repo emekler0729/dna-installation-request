@@ -20,46 +20,63 @@
     <section class="header px-3 container">
         <form action="#">
             <div class="row mb-3">
-                <div class="col-md-1 text-md-end">
-                    <label for="customer" class="col-form-label">Customer</label>
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input type="text" name="customer" id="customer" class="form-control" placeholder="Customer">
+                        <label for="customer">Customer</label>
+                    </div>
                 </div>
-                <div class="col">
-                    <input type="text" name="customer" id="customer" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-1 text-md-end">
-                    <label for="so-number" class="col-form-label">SO#</label>
-                </div>
-                <div class="col">
-                    <input type="text" name="so-number" id="so-number" class="form-control">
+                <div class="col-6">
+                    <div class="form-floating">
+                        <input type="text" name="so-number" id="so-number" class="form-control" placeholder="SO#">
+                        <label for="so-number" class="col-form-label">SO#</label>
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-1 text-md-end">
-                    <label for="location" class="col-form-label">Location</label>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <textarea name="location" id="location" rows="5" class="form-control"
+                                placeholder="Location"></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <textarea name="location" id="location" rows="3" class="form-control"></textarea>
+                <div class="col-6">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="site-contact" id="site-contact" class="form-control"
+                                    placeholder="Site Contact">
+                                <label for="site-contact" class="col-form-label">Site Contact</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" name="equipment" id="equipment" class="form-control"
+                                    placeholder="Equipment">
+                                <label for="equipment" class="col-form-label">Equipment</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-md-1 text-md-end">
-                    <label for="site-contact" class="col-form-label">Site Contact</label>
-                </div>
-                <div class="col">
-                    <input type="text" name="site-contact" id="site-contact" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-1 text-md-end">
-                    <label for="equipment" class="col-form-label">Equipment</label>
-                </div>
-                <div class="col">
-                    <input type="text" name="equipment" id="equipment" class="form-control">
-                </div>
-            </div>
+
         </form>
+    </section>
+    <section class="gantt container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Activity Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </section>
     <section class="activities accordion mb-3">
         <div class="accordion-item">
@@ -338,22 +355,10 @@
         </table>
     </section> -->
     <div class="controls d-flex justify-content-end pe-5 mb-3">
-        <button class="btn btn-primary" id="update-chart">Update Chart</button>
-        <button class="btn btn-success mx-1" id="add-row">Add Row</button>
-        <button class="btn btn-danger mx-1" id="remove-row">Remove Row</button>
+        <button class="btn btn-primary d-print-none" id="update-chart">Update Chart</button>
+        <button class="btn btn-success mx-1 d-print-none" id="add-row">Add Row</button>
+        <button class="btn btn-danger mx-1 d-print-none" id="remove-row">Remove Row</button>
     </div>
-    <section class="gantt container">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-    </section>
     <!-- <div class="map">
         <a
             href="https://www.google.com/maps/d/viewer?mid=1l-c5KSzidiGN1ISGRW7qoeZcLguUxFke&ouid=0&ll=42.92839865130758%2C-94.29258239132366&z=3">Domino
